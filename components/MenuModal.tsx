@@ -16,10 +16,7 @@ interface AddMenu {
 
 const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   const {
-    register,
     handleSubmit,
-    watch,
-    setValue,
     control,
     formState: { errors },
   } = useForm<AddMenu>({
@@ -33,65 +30,49 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   return (
     <Modal transparent={true} visible={visible} onRequestClose={onClose}>
       <View style={styles.modalView}>
-        {/* <View>
-          <Text>食べもの</Text>
-          <TextInput
-          
-            {...register("menuTitle")}
-            onChangeText={(text) => setValue("menuTitle", text)}
-            value={watch("menuTitle")}
-          ></TextInput>
-          <Text>食べた時間</Text>
-          <TextInput
-            {...register("ateAt")}
-            onChangeText={(text) => setValue("ateAt", text)}
-          ></TextInput>
-          <Text>いつ食べた</Text>
-          <TextInput
-            {...register("timeZone")}
-            onChangeText={(text) => setValue("timeZone", text)}
-          ></TextInput>
-          <TouchableOpacity
-            style={[styles.button, styles.buttonClose]}
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text style={styles.textStyle}>送信</Text>
-          </TouchableOpacity>
-        </View> */}
+        <Text>食べたもの</Text>
         <Controller
-          control={control} // controlを指定
-          name="menuTitle" // nameを指定
+          control={control}
+          name="menuTitle"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              onBlur={onBlur} // onBlurを設定
-              onChangeText={onChange} // onChangeを設定1
-              value={value} // valueを設定
+              style={styles.textInputArea}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+        ></Controller>
+        <Text>食べた時間</Text>
+        <Controller
+          control={control}
+          name="ateAt"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.textInputArea}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
             />
           )}
         />
+        <Text>食事の種類</Text>
         <Controller
-          control={control} // controlを指定
-          name="ateAt" // nameを指定
+          control={control}
+          name="timeZone"
           render={({ field: { onChange, onBlur, value } }) => (
             <TextInput
-              onBlur={onBlur} // onBlurを設定
-              onChangeText={onChange} // onChangeを設定
-              value={value} // valueを設定
+              style={styles.textInputArea}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
             />
           )}
         />
-        <Controller
-          control={control} // controlを指定
-          name="timeZone" // nameを指定
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              onBlur={onBlur} // onBlurを設定
-              onChangeText={onChange} // onChangeを設定
-              value={value} // valueを設定
-            />
-          )}
-        />
-        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+        <TouchableOpacity
+          onPress={handleSubmit(onSubmit)}
+          style={[styles.button, styles.buttonClose]}
+        >
           <Text>送信</Text>
         </TouchableOpacity>
       </View>
@@ -119,6 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    marginTop: 30,
   },
   buttonClose: {
     backgroundColor: "#2196F3",
@@ -131,6 +113,10 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+  },
+  textInputArea: {
+    borderWidth: 1,
+    borderColor: "Black",
   },
 });
 
