@@ -1,0 +1,131 @@
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+  spTitleContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    textAlign: "center",
+    // gap: 8,
+    marginTop: 10,
+    paddingBottom: 10,
+    fontSize: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#00a86b",
+    fontWeight: "bold",
+    color: "#00a86b",
+    textShadowColor: "rgba(0, 168, 107, 0.3)",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+    backgroundColor: "transparent",
+  },
+  pcTitleContainer: {
+    flex: 1,
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 10,
+    marginLeft: 20,
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#00a86b",
+    textShadowColor: "rgba(0, 168, 107, 0.3)",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+    backgroundColor: "transparent",
+  },
+  spTopContainer: {
+    gap: 8,
+    fontSize: 20,
+    alignItems: "center",
+    marginTop: 30,
+    marginBottom: 20,
+  },
+  pcTopContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 20,
+    gap: 8,
+    marginTop: 30,
+  },
+  spTimeZoneContainer: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "lightgray",
+    textAlign: "center",
+    alignItems: "center",
+  },
+  spTimeZone: {
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  spWeekContainer: {
+    flexDirection: "column",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  pcWeekContainer: {
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 8,
+    marginTop: 8,
+    textAlign: "center",
+
+    justifyContent: "center",
+    paddingTop: 100,
+  },
+  spDate: {
+    fontSize: 12,
+  },
+  pcDate: {
+    fontSize: 20,
+    paddingHorizontal: 20,
+  },
+  spTableBorder: {
+    // flex: 1,
+    // borderWidth: 1,
+    // borderColor: "#C1C0B9",
+  },
+  // sptimeZoneContainer: {
+  //   height: 40,
+  //   backgroundColor: "#f1f8ff",
+  // },
+  spHeaderText: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 12,
+  },
+  spDateColumn: {
+    flex: 1,
+    backgroundColor: "#f1f8ff",
+    borderLeftWidth: 1,
+  },
+  spDateText: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 12,
+  },
+  spDataRow: {
+    height: 36,
+  },
+  spDataText: {
+    textAlign: "center",
+    fontSize: 12,
+  },
+  fab: {
+    position: "absolute",
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    right: 30,
+    bottom: 30,
+
+    elevation: 8,
+  },
+  radarChart: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+});
