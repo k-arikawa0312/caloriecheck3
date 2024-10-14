@@ -21,6 +21,11 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
     formState: { errors },
   } = useForm<AddMenu>({
     mode: "onChange",
+    defaultValues: {
+      menuTitle: "",
+      ateAt: "",
+      timeZone: "",
+    },
   });
   const onSubmit = (data: AddMenu) => {
     console.log(data);
