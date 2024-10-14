@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { TextInput } from "react-native-gesture-handler";
 
 interface ModalComponentProps {
   visible: boolean;
@@ -8,34 +9,91 @@ interface ModalComponentProps {
 }
 
 interface AddMenu {
-  menuTitle: string;
-  ateAt: Date;
-  timeZone: "朝" | "昼" | "晩" | "間食";
+  menuTitle: string | undefined;
+  ateAt: string | undefined;
+  timeZone: string | undefined;
 }
 
 const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
+    control,
     formState: { errors },
   } = useForm<AddMenu>({
     mode: "onChange",
   });
   const onSubmit = (data: AddMenu) => {
     console.log(data);
+    onClose();
   };
 
   return (
     <Modal transparent={true} visible={visible} onRequestClose={onClose}>
       <View style={styles.modalView}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        {/* <View>
+          <Text>食べもの</Text>
+          <TextInput
+          
+            {...register("menuTitle")}
+            onChangeText={(text) => setValue("menuTitle", text)}
+            value={watch("menuTitle")}
+          ></TextInput>
+          <Text>食べた時間</Text>
+          <TextInput
+            {...register("ateAt")}
+            onChangeText={(text) => setValue("ateAt", text)}
+          ></TextInput>
+          <Text>いつ食べた</Text>
+          <TextInput
+            {...register("timeZone")}
+            onChangeText={(text) => setValue("timeZone", text)}
+          ></TextInput>
           <TouchableOpacity
             style={[styles.button, styles.buttonClose]}
-            onPress={onClose}
+            onPress={handleSubmit(onSubmit)}
           >
-            <Text style={styles.textStyle}>Close</Text>
+            <Text style={styles.textStyle}>送信</Text>
           </TouchableOpacity>
-        </form>
+        </View> */}
+        <Controller
+          control={control} // controlを指定
+          name="menuTitle" // nameを指定
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              onBlur={onBlur} // onBlurを設定
+              onChangeText={onChange} // onChangeを設定1
+              value={value} // valueを設定
+            />
+          )}
+        />
+        <Controller
+          control={control} // controlを指定
+          name="ateAt" // nameを指定
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              onBlur={onBlur} // onBlurを設定
+              onChangeText={onChange} // onChangeを設定
+              value={value} // valueを設定
+            />
+          )}
+        />
+        <Controller
+          control={control} // controlを指定
+          name="timeZone" // nameを指定
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              onBlur={onBlur} // onBlurを設定
+              onChangeText={onChange} // onChangeを設定
+              value={value} // valueを設定
+            />
+          )}
+        />
+        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+          <Text>送信</Text>
+        </TouchableOpacity>
       </View>
     </Modal>
   );
