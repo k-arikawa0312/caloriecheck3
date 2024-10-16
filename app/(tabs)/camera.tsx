@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   ImageProps,
+  Dimensions,
 } from "react-native";
 
 import { Camera, CameraView } from "expo-camera";
@@ -23,6 +24,10 @@ export default function CameraComponent() {
       setPreview(image?.uri);
     }
   };
+  const windowWidth = Dimensions.get("window").width;
+  const windowHeight = Dimensions.get("window").height;
+  const contentWidth = (windowWidth - 32) / 4;
+  const contentHeight = windowHeight / 20;
 
   useEffect(() => {
     (async () => {

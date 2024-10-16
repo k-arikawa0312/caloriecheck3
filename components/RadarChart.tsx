@@ -38,7 +38,9 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
   });
 
   return (
-    <View style={{ alignItems: "center", justifyContent: "center" }}>
+    <View
+      style={{ alignItems: "center", justifyContent: "center", marginTop: 50 }}
+    >
       <Svg width={size} height={size}>
         {gridPoints?.map((points, i) => (
           <Polygon
