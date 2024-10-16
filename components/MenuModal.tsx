@@ -1,7 +1,15 @@
 import React from "react";
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  Modal,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 interface ModalComponentProps {
   visible: boolean;
@@ -13,6 +21,10 @@ interface AddMenu {
   ateAt: string | undefined;
   timeZone: string | undefined;
 }
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+const contentWidth = (windowWidth - 32) / 4;
 
 const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   const {
@@ -35,6 +47,11 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   return (
     <Modal transparent={true} visible={visible} onRequestClose={onClose}>
       <View style={styles.modalView}>
+        <View style={styles.closeButtonContainer}>
+          <TouchableOpacity onPress={onClose}>
+            <Ionicons name="close" size={contentWidth * 0.3} />
+          </TouchableOpacity>
+        </View>
         <Text>食べたもの</Text>
         <Controller
           control={control}
@@ -86,6 +103,10 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
 };
 
 const styles = StyleSheet.create({
+  closeButtonContainer: {
+    alignSelf: "flex-start",
+    marginBottom: 10,
+  },
   modalView: {
     margin: 20,
     backgroundColor: "white",

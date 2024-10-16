@@ -23,10 +23,10 @@ export default function HomeScreen() {
   const [currentDate, setCurrentDate] = useState<string>("");
   const [dates, setDates] = useState<string[]>([]);
   const isSp = useMediaQuery(mediaQuery.sp);
-  const timeZone = ["朝", "昼", "夕"];
+  const timeZone = ["朝", "昼", "夕", "間食"];
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const meal: string[][] = [
-    ["a", "カツ丼", "ハムバーガー"],
+    ["a", "カツ丼", "ハムバーガー", "ラーメン"],
     ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
     ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
     ["n", "o", "p"],
@@ -109,7 +109,7 @@ export default function HomeScreen() {
             height: contentWidth * 0.5,
             borderRadius: (contentWidth * 0.5) / 2,
             right: windowWidth * 0.05,
-            bottom: "10%",
+            bottom: `${windowHeight * 0.002}%`,
           },
         ]}
         onPress={() => {
