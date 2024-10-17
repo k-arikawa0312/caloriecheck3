@@ -18,7 +18,7 @@ interface ModalComponentProps {
 
 interface AddMenu {
   menuTitle: string;
-  amount: number;
+  amount: number | string;
   ateAt: string;
   timeZone: string;
   calorie: number | string; //カロリー
@@ -27,6 +27,15 @@ interface AddMenu {
   carbohydrate: number | string; //糖質
   fiber: number | string; //食物繊維
   salt: number | string; //塩分
+}
+
+interface Nutrition {
+  calorie: number;
+  protein: number;
+  lipid: number;
+  carbohydrate: number;
+  fiber: number;
+  salt: number;
 }
 
 const windowWidth = Dimensions.get("window").width;
@@ -48,6 +57,7 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
       menuTitle: "",
       ateAt: "",
       timeZone: "",
+      amount: "",
       calorie: "",
       protein: "",
       lipid: "",
@@ -108,19 +118,32 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           )}
         />
+        <Text style={{ fontSize: contentWidth * 0.2 }}>食事の量</Text>
+        <Controller
+          control={control}
+          name="amount"
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextInput
+              style={styles.textInputArea}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value ? value.toString() : ""}
+            />
+          )}
+        />
         {nutritions[0].map((nutrition, index) => (
-          <View key={nutrition}>
+          <View key={nutrition} style={{ alignItems: "center" }}>
             <Text style={{ fontSize: contentWidth * 0.2 }}>
-              {nutritions[1][index]}
+              {nutritions[0][index]}
             </Text>
             <Controller
               control={control}
-              name={`${nutrition[0][index]}` as any} //後で型つける
+              name={nutrition as keyof Nutrition}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInputArea}
                   onBlur={onBlur}
-                  onChangeText={onChange}
+                  onChange={onChange}
                   value={value ? value.toString() : ""}
                 />
               )}
