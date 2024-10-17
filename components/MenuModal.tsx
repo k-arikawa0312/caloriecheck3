@@ -17,14 +17,27 @@ interface ModalComponentProps {
 }
 
 interface AddMenu {
-  menuTitle: string | undefined;
-  ateAt: string | undefined;
-  timeZone: string | undefined;
+  menuTitle: string;
+  amount: number;
+  ateAt: string;
+  timeZone: string;
+  nutrition: {
+    calorie: number | string; //カロリー
+    protein: number | string; //タンパク質
+    lipid: number | string; //脂質
+    carbohydrate: number | string; //糖質
+    fiber: number | string; //食物繊維
+    salt: number | string; //塩分
+  };
 }
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const contentWidth = (windowWidth - 32) / 4;
+const nutritions = [
+  ["calorie", "protein", "lipid", "carbohydrate", "fiber", "salt"],
+  ["カロリー", "タンパク質", "脂質", "糖質", "食物繊維", "塩分"],
+];
 
 const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   const {
@@ -37,6 +50,9 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
       menuTitle: "",
       ateAt: "",
       timeZone: "",
+      // nutrition:{
+      //   calorie:""
+      // }
     },
   });
   const onSubmit = (data: AddMenu) => {
@@ -52,7 +68,7 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             <Ionicons name="close" size={contentWidth * 0.3} />
           </TouchableOpacity>
         </View>
-        <Text>食べたもの</Text>
+        <Text style={{ fontSize: contentWidth * 0.2 }}>食べたもの</Text>
         <Controller
           control={control}
           name="menuTitle"
@@ -65,7 +81,7 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           )}
         ></Controller>
-        <Text>食べた時間</Text>
+        <Text style={{ fontSize: contentWidth * 0.2 }}>食べた時間</Text>
         <Controller
           control={control}
           name="ateAt"
@@ -78,7 +94,7 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           )}
         />
-        <Text>食事の種類</Text>
+        <Text style={{ fontSize: contentWidth * 0.2 }}>食事の種類</Text>
         <Controller
           control={control}
           name="timeZone"
@@ -91,11 +107,28 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           )}
         />
+        {nutritions.map((nutrition, index) => (
+          <>
+            <Text style={{ fontSize: contentWidth * 0.2 }}>食事の種類</Text>
+            <Controller
+              control={control}
+              name={`${nutrition[index]}`}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  style={styles.textInputArea}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  textValue={value}
+                />
+              )}
+            />
+          </>
+        ))}
         <TouchableOpacity
           onPress={handleSubmit(onSubmit)}
           style={[styles.button, styles.buttonClose]}
         >
-          <Text>送信</Text>
+          <Text style={{ color: "white" }}>送信</Text>
         </TouchableOpacity>
       </View>
     </Modal>
@@ -121,6 +154,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    fontSize: contentWidth * 0.2,
+    height: windowHeight * 0.9,
   },
   button: {
     borderRadius: 20,
