@@ -21,14 +21,12 @@ interface AddMenu {
   amount: number;
   ateAt: string;
   timeZone: string;
-  nutrition: {
-    calorie: number | string; //カロリー
-    protein: number | string; //タンパク質
-    lipid: number | string; //脂質
-    carbohydrate: number | string; //糖質
-    fiber: number | string; //食物繊維
-    salt: number | string; //塩分
-  };
+  calorie: number | string; //カロリー
+  protein: number | string; //タンパク質
+  lipid: number | string; //脂質
+  carbohydrate: number | string; //糖質
+  fiber: number | string; //食物繊維
+  salt: number | string; //塩分
 }
 
 const windowWidth = Dimensions.get("window").width;
@@ -50,9 +48,12 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
       menuTitle: "",
       ateAt: "",
       timeZone: "",
-      // nutrition:{
-      //   calorie:""
-      // }
+      calorie: "",
+      protein: "",
+      lipid: "",
+      carbohydrate: "",
+      fiber: "",
+      salt: "",
     },
   });
   const onSubmit = (data: AddMenu) => {
@@ -107,22 +108,24 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           )}
         />
-        {nutritions.map((nutrition, index) => (
-          <>
-            <Text style={{ fontSize: contentWidth * 0.2 }}>食事の種類</Text>
+        {nutritions[0].map((nutrition, index) => (
+          <View key={nutrition}>
+            <Text style={{ fontSize: contentWidth * 0.2 }}>
+              {nutritions[1][index]}
+            </Text>
             <Controller
               control={control}
-              name={`${nutrition[index]}`}
+              name={`${nutrition[0][index]}` as any} //後で型つける
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
                   style={styles.textInputArea}
                   onBlur={onBlur}
                   onChangeText={onChange}
-                  textValue={value}
+                  value={value ? value.toString() : ""}
                 />
               )}
             />
-          </>
+          </View>
         ))}
         <TouchableOpacity
           onPress={handleSubmit(onSubmit)}
