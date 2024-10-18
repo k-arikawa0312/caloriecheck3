@@ -134,7 +134,7 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
         {nutritions[0].map((nutrition, index) => (
           <View key={nutrition} style={{ alignItems: "center" }}>
             <Text style={{ fontSize: contentWidth * 0.2 }}>
-              {nutritions[0][index]}
+              {nutritions[1][index]}
             </Text>
             <Controller
               control={control}

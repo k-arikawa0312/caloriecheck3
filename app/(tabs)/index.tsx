@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import MenuModal from "../../components/MenuModal";
 import MenuTable from "../../components/MenuTable";
 import RadarChart from "../../components/RadarChart";
+import React from "react";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { provider } from "../../firebase";
 // import auth from "../../firebase";

@@ -13,6 +13,7 @@ import {
 import { Camera, CameraView } from "expo-camera";
 import { useEffect, useState } from "react";
 import { CameraType } from "expo-camera/build/legacy/Camera.types";
+import React from "react";
 export default function CameraComponent() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [type, setType] = useState(CameraType.back);
