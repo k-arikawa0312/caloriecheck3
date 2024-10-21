@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Button } from 'react-native';
-import signInWithGoogle from '../hooks/useFirebaseAuth';
+import { View, Button, TouchableOpacity,Text } from 'react-native';
+import  promptAsync  from '../hooks/useFirebaseAuth';
 
 const LoginScreen = () => {
   return (
     <View>
-      <Button title="Googleでログイン" onPress={signInWithGoogle} />
+      <TouchableOpacity  onPress={promptAsync}>
+        <Text>ログイン</Text>
+        </TouchableOpacity>
     </View>
   );
 };
