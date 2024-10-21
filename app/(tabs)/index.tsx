@@ -1,10 +1,8 @@
 import {
   View,
   Text,
-  LogBox,
   Dimensions,
   ScrollView,
-  TextStyle,
   TouchableOpacity,
 } from "react-native";
 import { useState, useEffect } from "react";
@@ -15,6 +13,7 @@ import MenuModal from "../../components/MenuModal";
 import MenuTable from "../../components/MenuTable";
 import RadarChart from "../../components/RadarChart";
 import React from "react";
+import SuggestMenu from "@/components/SuggestMenu";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { provider } from "../../firebase";
 // import auth from "../../firebase";
@@ -60,7 +59,6 @@ export default function HomeScreen() {
     },
   };
 
-  LogBox.ignoreAllLogs();
   useEffect(() => {
     const date = new Date();
     const formattedDate = `${date.getFullYear()}年${
@@ -94,13 +92,13 @@ export default function HomeScreen() {
       </View>
       <ScrollView>
         <Text style={{ textAlign: "center" }}>今日は{currentDate}</Text>
-        <Text style={{ textAlign: "center" }}>過去7日間の献立</Text>
-        <MenuTable dates={dates} timeZones={timeZone} meals={meal} />
         <RadarChart
           captions={captions}
           data={data.data}
           size={contentWidth * 3.5}
         />
+        <MenuTable dates={dates} timeZones={timeZone} meals={meal} />
+        <SuggestMenu></SuggestMenu>
       </ScrollView>
       <TouchableOpacity
         style={[

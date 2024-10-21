@@ -42,7 +42,7 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size, maxValue 
   });
 
   return (
-    <View style={{ alignItems: "center", justifyContent: "center", marginTop: 50 }}>
+    <View style={{ alignItems: "center", justifyContent: "center", marginTop: 20 }}>
       <Svg width={svgSize} height={svgSize}>
         {gridPoints?.map((points, i) => (
           <React.Fragment key={i}>
