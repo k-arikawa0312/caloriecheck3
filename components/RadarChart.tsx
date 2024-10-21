@@ -6,9 +6,10 @@ interface RadarChartProps {
   data: Record<string, number>;
   captions: Record<string, string>;
   size: number;
+  maxValue?: number;
 }
 
-const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
+const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size, maxValue = 1 }) => {
   const keys = Object.keys(data);
   const numberOfPoints = keys.length;
   const angleSlice = (Math.PI * 2) / numberOfPoints;
@@ -16,19 +17,20 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
   const svgSize = size * 1.2;
   const centerOffset = svgSize / 2;
   const labelOffset = radius * 0.2;
+  const scaleSteps = 5;
 
   const dataPoints = keys.map((key, i) => {
-    const value = data[key];
+    const value = data[key] / maxValue; // Normalize the value
     const angle = i * angleSlice;
     const x = centerOffset + radius * value * Math.cos(angle);
     const y = centerOffset - radius * value * Math.sin(angle);
-    return { x, y, value };
+    return { x, y, value: data[key] };
   });
 
   const points = dataPoints.map(point => `${point.x},${point.y}`).join(" ");
 
-  const gridPoints = Array.from({ length: 5 }, (_, i) => {
-    const r = radius * ((i + 1) / 5);
+  const gridPoints = Array.from({ length: scaleSteps }, (_, i) => {
+    const r = radius * ((i + 1) / scaleSteps);
     return keys
       .map((_, j) => {
         const angle = j * angleSlice;
@@ -43,13 +45,23 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
     <View style={{ alignItems: "center", justifyContent: "center", marginTop: 50 }}>
       <Svg width={svgSize} height={svgSize}>
         {gridPoints?.map((points, i) => (
-          <Polygon
-            key={i}
-            points={points}
-            stroke="gray"
-            strokeWidth="1"
-            fill="none"
-          />
+          <React.Fragment key={i}>
+            <Polygon
+              points={points}
+              stroke="gray"
+              strokeWidth="1"
+              fill="none"
+            />
+            <SvgText
+              x={centerOffset}
+              y={centerOffset - (radius * (i + 1)) / scaleSteps + 10}
+              fontSize="10"
+              fill="gray"
+              textAnchor="middle"
+            >
+              {((i + 1) * maxValue / scaleSteps).toFixed(1)}
+            </SvgText>
+          </React.Fragment>
         ))}
         {keys?.map((key, i) => {
           const angle = i * angleSlice;
@@ -106,7 +118,7 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
               fill="blue"
               textAnchor="middle"
             >
-              {point.value.toFixed(2)}
+              {point.value.toFixed(1)}
             </SvgText>
           </React.Fragment>
         ))}
