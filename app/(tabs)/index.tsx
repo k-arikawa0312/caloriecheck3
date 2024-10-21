@@ -14,6 +14,7 @@ import MenuTable from "../../components/MenuTable";
 import RadarChart from "../../components/RadarChart";
 import React from "react";
 import SuggestMenu from "@/components/SuggestMenu";
+import Login from "@/components/Login";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { provider } from "../../firebase";
 // import auth from "../../firebase";
@@ -88,6 +89,7 @@ export default function HomeScreen() {
     <>
       <View>
         {/* <GoogleSignIn/> */}
+        <Login></Login>
         <Text style={styles.spTitleContainer}>Calorie Checker</Text>
       </View>
       <ScrollView>
