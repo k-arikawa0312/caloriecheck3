@@ -54,32 +54,33 @@ const truncateText = (text: string, maxLength: number) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    borderTopWidth:1,
   },
   table: {
     borderTopWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "black",
   },
   headerRow: {
     flexDirection: "row",
     backgroundColor: "#f0f0f0",
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "black",
   },
   headerCell: {
     padding: 10,
     fontWeight: "bold",
     textAlign: "center",
     borderRightWidth: 1,
-    borderRightColor: "#ccc",
+    borderRightColor: "black",
   },
   row: {
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderBottomColor: "black",
   },
   cell: {
     borderRightWidth: 1,
-    borderRightColor: "#ccc",
+    borderRightColor: "black",
     justifyContent: "center",
     alignItems: "center",
   },

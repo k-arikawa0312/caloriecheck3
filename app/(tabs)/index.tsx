@@ -99,7 +99,7 @@ export default function HomeScreen() {
         <RadarChart
           captions={captions}
           data={data.data}
-          size={contentWidth * 3}
+          size={contentWidth * 3.5}
         />
       </ScrollView>
       <TouchableOpacity
