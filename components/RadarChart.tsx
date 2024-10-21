@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Svg, { Polygon, Line, Text as SvgText } from "react-native-svg";
+import Svg, { Polygon, Line, Text as SvgText, Circle } from "react-native-svg";
 
 interface RadarChartProps {
   data: Record<string, number>;
@@ -12,20 +12,20 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
   const keys = Object.keys(data);
   const numberOfPoints = keys.length;
   const angleSlice = (Math.PI * 2) / numberOfPoints;
-  const radius = size / 2.5; // チャートサイズを少し小さくする
-  const svgSize = size * 1.2; // SVGサイズを大きくする
-  const centerOffset = svgSize / 2; // 中心点のオフセット
-  const labelOffset = radius * 0.2; // ラベルのオフセットを調整
+  const radius = size / 2.5;
+  const svgSize = size * 1.2;
+  const centerOffset = svgSize / 2;
+  const labelOffset = radius * 0.2;
 
-  const points = keys
-    .map((key, i) => {
-      const value = data[key];
-      const angle = i * angleSlice;
-      const x = centerOffset + radius * value * Math.cos(angle);
-      const y = centerOffset - radius * value * Math.sin(angle);
-      return `${x},${y}`;
-    })
-    .join(" ");
+  const dataPoints = keys.map((key, i) => {
+    const value = data[key];
+    const angle = i * angleSlice;
+    const x = centerOffset + radius * value * Math.cos(angle);
+    const y = centerOffset - radius * value * Math.sin(angle);
+    return { x, y, value };
+  });
+
+  const points = dataPoints.map(point => `${point.x},${point.y}`).join(" ");
 
   const gridPoints = Array.from({ length: 5 }, (_, i) => {
     const r = radius * ((i + 1) / 5);
@@ -91,6 +91,25 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
             </SvgText>
           );
         })}
+        {dataPoints.map((point, i) => (
+          <React.Fragment key={i}>
+            <Circle
+              cx={point.x}
+              cy={point.y}
+              r="3"
+              fill="blue"
+            />
+            <SvgText
+              x={point.x}
+              y={point.y - 10}
+              fontSize="10"
+              fill="blue"
+              textAnchor="middle"
+            >
+              {point.value.toFixed(2)}
+            </SvgText>
+          </React.Fragment>
+        ))}
       </Svg>
     </View>
   );
