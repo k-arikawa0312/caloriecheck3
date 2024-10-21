@@ -118,7 +118,7 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size, maxValue 
               fill="blue"
               textAnchor="middle"
             >
-              {point.value.toFixed(1)}
+              {`${Math.floor(point.value*100)}%`}
             </SvgText>
           </React.Fragment>
         ))}
