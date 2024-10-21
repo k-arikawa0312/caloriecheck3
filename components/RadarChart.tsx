@@ -12,15 +12,17 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
   const keys = Object.keys(data);
   const numberOfPoints = keys.length;
   const angleSlice = (Math.PI * 2) / numberOfPoints;
-  const radius = size / 2;
-  const labelOffset = 30; // ラベルのオフセットを追加
+  const radius = size / 2.5; // チャートサイズを少し小さくする
+  const svgSize = size * 1.2; // SVGサイズを大きくする
+  const centerOffset = svgSize / 2; // 中心点のオフセット
+  const labelOffset = radius * 0.2; // ラベルのオフセットを調整
 
   const points = keys
     .map((key, i) => {
       const value = data[key];
       const angle = i * angleSlice;
-      const x = radius + radius * value * Math.cos(angle);
-      const y = radius - radius * value * Math.sin(angle);
+      const x = centerOffset + radius * value * Math.cos(angle);
+      const y = centerOffset - radius * value * Math.sin(angle);
       return `${x},${y}`;
     })
     .join(" ");
@@ -30,18 +32,16 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
     return keys
       .map((_, j) => {
         const angle = j * angleSlice;
-        const x = radius + r * Math.cos(angle);
-        const y = radius - r * Math.sin(angle);
+        const x = centerOffset + r * Math.cos(angle);
+        const y = centerOffset - r * Math.sin(angle);
         return `${x},${y}`;
       })
       .join(" ");
   });
 
   return (
-    <View
-      style={{ alignItems: "center", justifyContent: "center", marginTop: 50 }}
-    >
-      <Svg width={size} height={size}>
+    <View style={{ alignItems: "center", justifyContent: "center", marginTop: 50 }}>
+      <Svg width={svgSize} height={svgSize}>
         {gridPoints?.map((points, i) => (
           <Polygon
             key={i}
@@ -53,13 +53,13 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
         ))}
         {keys?.map((key, i) => {
           const angle = i * angleSlice;
-          const x = radius + radius * Math.cos(angle);
-          const y = radius - radius * Math.sin(angle);
+          const x = centerOffset + radius * Math.cos(angle);
+          const y = centerOffset - radius * Math.sin(angle);
           return (
             <Line
               key={i}
-              x1={radius}
-              y1={radius}
+              x1={centerOffset}
+              y1={centerOffset}
               x2={x}
               y2={y}
               stroke="gray"
@@ -75,16 +75,17 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size }) => {
         />
         {keys.map((key, i) => {
           const angle = i * angleSlice;
-          const x = radius + (radius + labelOffset) * Math.cos(angle);
-          const y = radius - (radius + labelOffset) * Math.sin(angle);
+          const x = centerOffset + (radius + labelOffset) * Math.cos(angle);
+          const y = centerOffset - (radius + labelOffset) * Math.sin(angle);
           return (
             <SvgText
               key={i}
               x={x}
               y={y}
-              fontSize="10"
+              fontSize="12"
               fill="black"
               textAnchor="middle"
+              alignmentBaseline="middle"
             >
               {captions[key]}
             </SvgText>
