@@ -56,10 +56,10 @@ const RadarChart: React.FC<RadarChartProps> = ({ data, captions, size, maxValue 
               x={centerOffset}
               y={centerOffset - (radius * (i + 1)) / scaleSteps + 10}
               fontSize="10"
-              fill="gray"
+              fill="black"
               textAnchor="middle"
             >
-              {((i + 1) * maxValue / scaleSteps).toFixed(1)}
+              {`${((i + 1) * maxValue / scaleSteps)*100}%`}
             </SvgText>
           </React.Fragment>
         ))}
