@@ -13,14 +13,16 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.k.a.caloriecheck3"
+      "package": "com.k.a.caloriecheck3",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "bundler": "metro",

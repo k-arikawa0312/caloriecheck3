@@ -14,6 +14,7 @@ import MenuTable from "../../components/MenuTable";
 import RadarChart from "../../components/RadarChart";
 import React from "react";
 import SuggestMenu from "@/components/SuggestMenu";
+// import LoginScreen from "@/components/Login";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { provider } from "../../firebase";
 // import auth from "../../firebase";
@@ -25,7 +26,7 @@ export default function HomeScreen() {
   const isSp = useMediaQuery(mediaQuery.sp);
   const timeZone = ["朝", "昼", "夕", "間食"];
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const meal: string[][] = [
+  const meals: string[][] = [
     ["a", "カツ丼", "ハムバーガー", "ラーメン"],
     ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
     ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
@@ -88,6 +89,7 @@ export default function HomeScreen() {
     <>
       <View>
         {/* <GoogleSignIn/> */}
+        {/* <LoginsScreen /> */}
         <Text style={styles.spTitleContainer}>Calorie Checker</Text>
       </View>
       <ScrollView>
@@ -97,7 +99,7 @@ export default function HomeScreen() {
           data={data.data}
           size={contentWidth * 3.5}
         />
-        <MenuTable dates={dates} timeZones={timeZone} meals={meal} />
+        <MenuTable dates={dates} timeZones={timeZone} meals={meals} />
         <SuggestMenu></SuggestMenu>
       </ScrollView>
       <TouchableOpacity
