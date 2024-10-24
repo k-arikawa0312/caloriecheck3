@@ -25,7 +25,7 @@ interface AddUser {
     age: number|string;
     weight: number|string;
     height: number|string;
-    gender: "man"|"woman";
+    gender: "male"|"female";
 }
 
   const windowWidth = Dimensions.get("window").width;
@@ -49,7 +49,8 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
       name:"",
       age:"",
       weight:"",
-      height:""  
+      height:"",
+      gender:"male"  
     },
   });
   const onSubmit = (data: AddUser) => {
