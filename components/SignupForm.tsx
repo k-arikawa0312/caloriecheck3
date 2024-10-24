@@ -84,7 +84,7 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           </View>
         ))}
-               <Controller
+        <Controller
           control={control}
           name="gender"
           render={({ field: { onChange, value } }) => (

@@ -29,6 +29,13 @@ interface AddMenu {
   salt: number | string; //塩分
 }
 
+interface MenuInfo {
+  menuTitle: string;
+  amount: number | string;
+  ateAt: string;
+  timeZone: string;
+}
+
 interface Nutrition {
   calorie: number;
   protein: number;
@@ -45,6 +52,10 @@ const nutritions = [
   ["calorie", "protein", "lipid", "carbohydrate", "fiber", "salt"],
   ["カロリー", "タンパク質", "脂質", "糖質", "食物繊維", "塩分"],
 ];
+const menuInfos=[
+  ["menuTitle","ateAt","timeZone","amount"],
+  ["食べたもの","食べた時間","食事の種類","食事の量"],
+]
 
 const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
   const {
@@ -79,58 +90,25 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             <Ionicons name="close" size={contentWidth * 0.3} />
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: contentWidth * 0.2 }}>食べたもの</Text>
-        <Controller
-          control={control}
-          name="menuTitle"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.textInputArea}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-        ></Controller>
-        <Text style={{ fontSize: contentWidth * 0.2 }}>食べた時間</Text>
-        <Controller
-          control={control}
-          name="ateAt"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.textInputArea}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-        />
-        <Text style={{ fontSize: contentWidth * 0.2 }}>食事の種類</Text>
-        <Controller
-          control={control}
-          name="timeZone"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.textInputArea}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-            />
-          )}
-        />
-        <Text style={{ fontSize: contentWidth * 0.2 }}>食事の量</Text>
-        <Controller
-          control={control}
-          name="amount"
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={styles.textInputArea}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value ? value.toString() : ""}
-            />
-          )}
-        />
+        {menuInfos[0].map((menuInfo,index)=>(
+          <View key={menuInfo} style={{ alignItems: "center" }}>
+          <Text style={{ fontSize: contentWidth * 0.2 }}>
+            {menuInfos[1][index]}
+          </Text>
+          <Controller
+            control={control}
+            name={menuInfo as keyof MenuInfo}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                style={styles.textInputArea}
+                onBlur={onBlur}
+                onChange={onChange}
+                value={value ? value.toString() : ""}
+              />
+            )}
+          />
+        </View>
+        ))}
         {nutritions[0].map((nutrition, index) => (
           <View key={nutrition} style={{ alignItems: "center" }}>
             <Text style={{ fontSize: contentWidth * 0.2 }}>
