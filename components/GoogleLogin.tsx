@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Button, TouchableOpacity,Text } from 'react-native';
-import  promptAsync  from '../hooks/useFirebaseAuth';
+import  signIn  from '../hooks/useGoogleFirebaseAuth';
 
-const LoginScreen = () => {
+const GoogleLogin = () => {
   return (
     <View>
-      <TouchableOpacity  onPress={promptAsync}>
+      <TouchableOpacity  onPress={signIn}>
         <Text>ログイン</Text>
         </TouchableOpacity>
     </View>
   );
 };
 
-export default LoginScreen;
+export default GoogleLogin;
