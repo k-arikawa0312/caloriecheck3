@@ -14,12 +14,10 @@ import MenuTable from "../../components/MenuTable";
 import RadarChart from "../../components/RadarChart";
 import React from "react";
 import SuggestMenu from "@/components/SuggestMenu";
-import GoogleLogin from "@/components/GoogleLogin";
 import SignupForm from "@/components/SignupForm";
-// import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-// import { provider } from "../../firebase";
-// import auth from "../../firebase";
-// import GoogleSignIn from "../../firebase";
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../firebase'; // Adjust the path as necessary
+
 
 export default function HomeScreen() {
   const [currentDate, setCurrentDate] = useState<string>("");
@@ -63,6 +61,7 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
+    const app = initializeApp(firebaseConfig)
     const date = new Date();
     const formattedDate = `${date.getFullYear()}年${
       date.getMonth() + 1

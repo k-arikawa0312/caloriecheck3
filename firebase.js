@@ -1,7 +1,7 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp,getApps } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
   projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
@@ -11,5 +11,12 @@ const firebaseConfig = {
   measurementId: process.env.EXPO_PUBLIC_MEASUREMENT_ID,
 };
 
+
 const app = initializeApp(firebaseConfig);
+if (!getApps().length) {
+  initializeApp(firebaseConfig);
+}
 export const auth = getAuth(app);
+export const getFirebaseApp = () => {
+  return getApps()[0];
+};

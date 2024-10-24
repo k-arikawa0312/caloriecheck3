@@ -12,6 +12,8 @@ import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
+import { addUser } from "@/hooks/useSignup";
+
 
 interface ModalComponentProps {
   visible: boolean;
@@ -54,7 +56,8 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
     },
   });
   const onSubmit = (data: AddUser) => {
-    console.log(data);
+    const addUserInfo = addUser(data)
+    console.log(addUserInfo)
     onClose();
   };
 

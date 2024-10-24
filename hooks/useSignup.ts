@@ -6,11 +6,12 @@ interface UserData {
     email: string;
     password: string;
     name: string;
-    age: number;
-    weight: number;
-    height: number;
-    gender: string;
+    age: number|string;
+    weight: number|string;
+    height: number|string;
+    gender: "male"|"female";
 }
+
 export const addUser = async (userData:UserData) => {
     const db=firebase.firestore();
   try {
