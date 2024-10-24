@@ -15,6 +15,7 @@ import RadarChart from "../../components/RadarChart";
 import React from "react";
 import SuggestMenu from "@/components/SuggestMenu";
 import GoogleLogin from "@/components/GoogleLogin";
+import SignupForm from "@/components/SignupForm";
 // import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 // import { provider } from "../../firebase";
 // import auth from "../../firebase";
@@ -25,7 +26,8 @@ export default function HomeScreen() {
   const [dates, setDates] = useState<string[]>([]);
   const isSp = useMediaQuery(mediaQuery.sp);
   const timeZone = ["朝", "昼", "夕", "間食"];
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
+  const [isAddUserModalOpen,setIsAddUserModalOpen]=useState<boolean>(false)
   const meals: string[][] = [
     ["a", "カツ丼", "ハムバーガー", "ラーメン"],
     ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
@@ -90,6 +92,9 @@ export default function HomeScreen() {
       <View>
         {/* <GoogleLogin /> */}
         <Text style={styles.spTitleContainer}>Calorie Checker</Text>
+        <TouchableOpacity onPress={()=>setIsAddUserModalOpen(true)}>
+          <Text>サインアップ</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView>
         <Text style={{ textAlign: "center" }}>今日は{currentDate}</Text>
@@ -113,7 +118,7 @@ export default function HomeScreen() {
           },
         ]}
         onPress={() => {
-          setIsModalOpen(true);
+          setIsMenuModalOpen(true);
         }}
       >
         <Ionicons
@@ -122,12 +127,19 @@ export default function HomeScreen() {
           color="dodgerblue"
         />
       </TouchableOpacity>
-      {isModalOpen && (
+      {isMenuModalOpen && (
         <MenuModal
-          visible={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
+          visible={isMenuModalOpen}
+          onClose={() => setIsMenuModalOpen(false)}
         />
       )}
+      {isAddUserModalOpen && (
+        <SignupForm
+          visible={isAddUserModalOpen}
+          onClose={() => setIsAddUserModalOpen(false)}
+        />
+      )}
+
     </>
   ) : (
     <View>
