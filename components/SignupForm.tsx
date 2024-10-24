@@ -88,15 +88,15 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
           control={control}
           name="gender"
           render={({ field: { onChange, value } }) => (
-            <View>
-              <Text>性別</Text>
+            <View style={{alignItems:"center"}}>
+              <Text style={{alignItems:"center",fontSize:20}}>性別</Text>
               <Picker
                 selectedValue={value}
                 onValueChange={(itemValue) => onChange(itemValue)}
+                style={styles.picker}
               >
                 <Picker.Item label="男性" value="male" />
                 <Picker.Item label="女性" value="female" />
-                
               </Picker>
             </View>
           )}
@@ -106,7 +106,7 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
           onPress={handleSubmit(onSubmit)}
           style={[styles.button, styles.buttonClose]}
         >
-          <Text style={{ color: "white" }}>送信</Text>
+          <Text style={{ color: "white" }}>新規登録</Text>
         </TouchableOpacity>
       </View>
     </Modal>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
     fontSize: contentWidth * 0.2,
-    height: windowHeight * 0.9,
+    height: windowHeight * 0.6,
   },
   button: {
     borderRadius: 20,
@@ -157,6 +157,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "Black",
   },
+  picker:{
+    width:contentWidth*0.7
+  }
 });
 
 export default SignupForm;
