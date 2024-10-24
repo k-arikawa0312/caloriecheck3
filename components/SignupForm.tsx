@@ -6,10 +6,12 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
+  
 } from "react-native";
 import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import { Picker } from "@react-native-picker/picker";
 
 interface ModalComponentProps {
   visible: boolean;
@@ -30,8 +32,8 @@ interface AddUser {
   const windowHeight = Dimensions.get("window").height;
   const contentWidth = (windowWidth - 32) / 4;
   const userInfo=[
-  ["email","password","name","age","height","weight","gender"],
-  ["メールアドレス","パスワード","ユーザーネーム","年齢","身長","体重","性別"]
+  ["email","password","name","age","height","weight"],
+  ["メールアドレス","パスワード","ユーザーネーム","年齢","身長","体重"]
 ]
 
 const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
@@ -82,7 +84,24 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
             />
           </View>
         ))}
-        
+               <Controller
+          control={control}
+          name="gender"
+          render={({ field: { onChange, value } }) => (
+            <View>
+              <Text>性別</Text>
+              <Picker
+                selectedValue={value}
+                onValueChange={(itemValue) => onChange(itemValue)}
+              >
+                <Picker.Item label="男性" value="male" />
+                <Picker.Item label="女性" value="female" />
+                
+              </Picker>
+            </View>
+          )}
+        />
+        {errors.gender && <Text>性別を選択してください。</Text>}
         <TouchableOpacity
           onPress={handleSubmit(onSubmit)}
           style={[styles.button, styles.buttonClose]}
