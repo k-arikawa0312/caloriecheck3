@@ -14,7 +14,17 @@
     },
     "ios": {
       "supportsTablet": true,
-      "googleServicesFile": "./GoogleService-Info.plist"
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "CFBundleURLTypes": [
+          {
+            "CFBundleURLSchemes": [
+              "com.googleusercontent.apps.YOUR_CLIENT_ID"
+            ]
+          }
+        ]
+      },
+      "bundleIdentifier": "com.k.a.caloriecheck3"
     },
     "android": {
       "adaptiveIcon": {
@@ -37,6 +47,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "24836414-3c72-43b9-a8ec-df8bc6a1dc1b"
+      }
     }
   }
 }
