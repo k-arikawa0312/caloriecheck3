@@ -1,6 +1,8 @@
 import { collection, addDoc, getFirestore } from 'firebase/firestore';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
+import fb from "firebase/app";
+import { firebaseConfig } from '@/firebase';
 
 interface UserData {
     email: string;
@@ -12,8 +14,12 @@ interface UserData {
     gender: "male"|"female";
 }
 
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+const db=getFirestore();
 export const addUser = async (userData:UserData) => {
-    const db=firebase.firestore();
   try {
     const docRef = await addDoc(collection(db, "users"), userData);
     console.log("Document written with ID: ", docRef.id);
