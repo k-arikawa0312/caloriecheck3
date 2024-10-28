@@ -17,23 +17,31 @@ import SuggestMenu from "@/components/SuggestMenu";
 import SignupForm from "@/components/SignupForm";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../../firebase'; // Adjust the path as necessary
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
+if (!firebase.apps.length) {
+  initializeApp(firebaseConfig);
+}
+
+const auth = firebase.auth();
 
 export default function HomeScreen() {
   const [currentDate, setCurrentDate] = useState<string>("");
   const [dates, setDates] = useState<string[]>([]);
   const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
   const [isAddUserModalOpen,setIsAddUserModalOpen]=useState<boolean>(false)
+  const [user, setUser] = useState<firebase.User | null>(null);
   const isSp = useMediaQuery(mediaQuery.sp);
   const timeZone = ["朝", "昼", "夕", "間食"];
   const meals: string[][] = [
     ["a", "カツ丼", "ハムバーガー", "ラーメン"],
-    ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
-    ["ハムバーガー", "チーズバーガー", "チキンバーガー"],
-    ["n", "o", "p"],
-    ["r", "s", "t"],
-    ["v", "w", "x"],
-    ["z", "aa", "bb"],
+    ["ハムバーガー", "チーズバーガー", "チキンバーガー","aaa"],
+    ["ハムバーガー", "チーズバーガー", "チキンバーガー","qqq"],
+    ["n", "o", "p","aqa"],
+    ["r", "s", "t","oosos"],
+    ["v", "w", "x","aksks"],
+    ["z", "aa", "bb","kdkd"],
   ];
   const captions = {
     a: "カロリー",
@@ -61,12 +69,23 @@ export default function HomeScreen() {
   };
 
   useEffect(() => {
-    const app = initializeApp(firebaseConfig)
     const date = new Date();
     const formattedDate = `${date.getFullYear()}年${
       date.getMonth() + 1
     }月${date.getDate()}日`;
     setCurrentDate(formattedDate);
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -89,10 +108,11 @@ export default function HomeScreen() {
   return isSp ? (
     <>
       <View>
-        {/* <GoogleLogin /> */}
         <Text style={styles.spTitleContainer}>Calorie Checker</Text>
         <TouchableOpacity onPress={()=>setIsAddUserModalOpen(true)}>
-          <Text>サインアップ</Text>
+          <Text style={{ textAlign: "center" }}>
+          {user ? `ようこそ、${user.displayName || user.email}さん` : "サインアップ"}
+          </Text>
         </TouchableOpacity>
       </View>
       <ScrollView>
@@ -103,7 +123,7 @@ export default function HomeScreen() {
           size={contentWidth * 3.5}
         />
         <MenuTable dates={dates} timeZones={timeZone} meals={meals} />
-        <SuggestMenu></SuggestMenu>
+        {/* <SuggestMenu></SuggestMenu> */}
       </ScrollView>
       <TouchableOpacity
         style={[
