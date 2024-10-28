@@ -22,10 +22,10 @@ import { firebaseConfig } from '../../firebase'; // Adjust the path as necessary
 export default function HomeScreen() {
   const [currentDate, setCurrentDate] = useState<string>("");
   const [dates, setDates] = useState<string[]>([]);
-  const isSp = useMediaQuery(mediaQuery.sp);
-  const timeZone = ["朝", "昼", "夕", "間食"];
   const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
   const [isAddUserModalOpen,setIsAddUserModalOpen]=useState<boolean>(false)
+  const isSp = useMediaQuery(mediaQuery.sp);
+  const timeZone = ["朝", "昼", "夕", "間食"];
   const meals: string[][] = [
     ["a", "カツ丼", "ハムバーガー", "ラーメン"],
     ["ハムバーガー", "チーズバーガー", "チキンバーガー"],

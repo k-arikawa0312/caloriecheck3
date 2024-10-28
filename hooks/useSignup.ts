@@ -20,6 +20,7 @@ if (!firebase.apps.length) {
 
 const db=getFirestore();
 export const addUser = async (userData:UserData) => {
+  console.log(userData)
   try {
     const docRef = await addDoc(collection(db, "users"), userData);
     console.log("Document written with ID: ", docRef.id);

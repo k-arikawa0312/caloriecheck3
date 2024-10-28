@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   View,
@@ -13,6 +13,8 @@ import { TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
 import { addUser } from "@/hooks/useSignup";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 
 interface ModalComponentProps {
@@ -38,7 +40,21 @@ interface AddUser {
   ["メールアドレス","パスワード","ユーザーネーム","年齢","身長","体重"]
 ]
 
+const auth=firebase.auth()
 const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
+  const [user, setUser] = useState<firebase.User | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
   const {
     handleSubmit,
     control,
