@@ -22,8 +22,8 @@ const db=getFirestore();
 export const addUser = async (userData:UserData) => {
   console.log(userData)
   try {
-    const docRef = await addDoc(collection(db, "users"), userData);
-    console.log("Document written with ID: ", docRef.id);
+    const docRef = await firebase.auth().createUserWithEmailAndPassword(userData.email, userData.password);
+    console.log("User created with UID: ", docRef.user?.uid);
   } catch (e) {
     console.error("Error adding document: ", e);
   }
