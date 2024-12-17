@@ -23,7 +23,7 @@ interface AddMenu {
   timeZone: string;
   calorie: number | string; //カロリー
   protein: number | string; //タンパク質
-  lipid: number | string; //脂質
+  fat: number | string; //脂質
   carbohydrate: number | string; //糖質
   fiber: number | string; //食物繊維
   salt: number | string; //塩分
@@ -39,7 +39,7 @@ interface MenuInfo {
 interface Nutrition {
   calorie: number;
   protein: number;
-  lipid: number;
+  fat: number;
   carbohydrate: number;
   fiber: number;
   salt: number;
@@ -49,7 +49,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 const contentWidth = (windowWidth - 32) / 4;
 const nutritions = [
-  ["calorie", "protein", "lipid", "carbohydrate", "fiber", "salt"],
+  ["calorie", "protein", "fat", "carbohydrate", "fiber", "salt"],
   ["カロリー", "タンパク質", "脂質", "糖質", "食物繊維", "塩分"],
 ];
 const menuInfos=[
@@ -71,7 +71,7 @@ const MenuModal: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
       amount: "",
       calorie: "",
       protein: "",
-      lipid: "",
+      fat: "",
       carbohydrate: "",
       fiber: "",
       salt: "",

@@ -12,9 +12,8 @@ import { Controller, useForm } from "react-hook-form";
 import { TextInput } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
-import { addUser } from "@/hooks/useSignup";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
+// import { addUser } from "@/hooks/useSignup";
+
 
 
 interface ModalComponentProps {
@@ -40,21 +39,21 @@ interface AddUser {
   ["メールアドレス","パスワード","ユーザーネーム","年齢","身長","体重"]
 ]
 
-const auth=firebase.auth()
+// const auth=firebase.auth()
 const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
-  const [user, setUser] = useState<firebase.User | null>(null);
+  // const [user, setUser] = useState<firebase.User | null>(null);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       setUser(user);
+  //     } else {
+  //       setUser(null);
+  //     }
+  //   });
 
-    return () => unsubscribe();
-  }, []);
+  //   return () => unsubscribe();
+  // }, []);
   const {
     handleSubmit,
     control,
@@ -72,8 +71,8 @@ const SignupForm: React.FC<ModalComponentProps> = ({ visible, onClose }) => {
     },
   });
   const onSubmit = (data: AddUser) => {
-    const addUserInfo = addUser(data)
-    console.log(addUserInfo)
+    // const addUserInfo = addUser(data)
+    // console.log(addUserInfo)
     onClose();
   };
 

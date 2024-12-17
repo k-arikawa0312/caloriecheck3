@@ -15,23 +15,14 @@ import RadarChart from "../../components/RadarChart";
 import React from "react";
 import SuggestMenu from "@/components/SuggestMenu";
 import SignupForm from "@/components/SignupForm";
-import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from '../../firebase'; // Adjust the path as necessary
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
 
-if (!firebase.apps.length) {
-  initializeApp(firebaseConfig);
-}
 
-const auth = firebase.auth();
 
 export default function HomeScreen() {
   const [currentDate, setCurrentDate] = useState<string>("");
   const [dates, setDates] = useState<string[]>([]);
   const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
   const [isAddUserModalOpen,setIsAddUserModalOpen]=useState<boolean>(false)
-  const [user, setUser] = useState<firebase.User | null>(null);
   const isSp = useMediaQuery(mediaQuery.sp);
   const timeZone = ["朝", "昼", "夕", "間食"];
   const meals: string[][] = [
@@ -76,17 +67,6 @@ export default function HomeScreen() {
     setCurrentDate(formattedDate);
   }, []);
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   useEffect(() => {
     const getDates = () => {
@@ -109,11 +89,8 @@ export default function HomeScreen() {
     <>
       <View>
         <Text style={styles.spTitleContainer}>Calorie Checker</Text>
-        <TouchableOpacity onPress={()=>setIsAddUserModalOpen(true)}>
-          <Text style={{ textAlign: "center" }}>
-          {user ? `ようこそ、${user.displayName || user.email}さん` : "サインアップ"}
-          </Text>
-        </TouchableOpacity>
+        {/* <TouchableOpacity onPress={()=>setIsAddUserModalOpen(true)}>
+        </TouchableOpacity> */}
       </View>
       <ScrollView>
         <Text style={{ textAlign: "center" }}>今日は{currentDate}</Text>
