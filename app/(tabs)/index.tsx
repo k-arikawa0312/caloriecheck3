@@ -1,23 +1,18 @@
-import {
-  View,
-  Text,
-  Dimensions,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
-import { useState, useEffect } from "react";
-import { mediaQuery, useMediaQuery } from "@/hooks/useMediaQuery";
-import { styles } from "./indexStyle";
-import { Ionicons } from "@expo/vector-icons";
-import MenuModal from "../../components/MenuModal";
-import MenuTable from "../../components/MenuTable";
-import RadarChart from "../../components/RadarChart";
-import React from "react";
-import SuggestMenu from "@/components/SuggestMenu";
-import SignupForm from "@/components/SignupForm";
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './homeScreen';
+import PastMenu from './pastMenu'; // 新しい画面をインポート
 
+const Stack = createNativeStackNavigator();
 
-
-export default function HomeScreen() {
- 
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="PastMenu" component={PastMenu} /> 
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
