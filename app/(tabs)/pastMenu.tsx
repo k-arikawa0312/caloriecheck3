@@ -14,8 +14,17 @@ import {
   import RadarChart from "../../components/RadarChart";
   import React from "react";
   import SuggestMenu from "@/components/SuggestMenu";
+  import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-const PastMenu=()=>{  
+// ナビゲーションの型を定義
+type PastMenuProps = {
+  navigation: NativeStackNavigationProp<{
+    HomeScreen: undefined; // 'Home'画面のパラメータの型
+    // 他の画面の型を追加することも可能
+  }>;
+};
+
+const PastMenu:React.FC<PastMenuProps>=()=>{  
     const [currentDate, setCurrentDate] = useState<string>("");
     const [dates, setDates] = useState<string[]>([]);
     const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
