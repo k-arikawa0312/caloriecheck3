@@ -40,12 +40,18 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-around',
       padding: 10,
-      backgroundColor: '#fff', // 背景色を設定
+      backgroundColor: '#fff',
       borderTopWidth: 1,
-      borderTopColor: '#ccc', // 上部の境界線
+      borderTopColor: '#ccc',
+      position: 'absolute',
+      top: 200, // タブを画面下部に配置
+      left: 0,
+      right: 0,
+      height: 60, // タブの高さを60pxに設定
     },
     tabButton: {
       flex: 1,
       alignItems: 'center',
+      justifyContent: 'center', // ボタンの内容を垂直方向にもセンタリング
     },
   });
