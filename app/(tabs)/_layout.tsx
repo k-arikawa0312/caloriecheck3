@@ -1,56 +1,33 @@
-import { Tabs } from "expo-router";
 import React from "react";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import HomeScreen from './homeScreen'; // 必要に応じてインポート
+import CameraComponet from './camera'; // カメラ画面をインポート
+import PastMenu from "./pastMenu"; // 他の画面をインポート
+import CameraComponent from "./camera";
 
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
-import { Colors } from "@/constants/Colors";
-import { useColorScheme } from "@/hooks/useColorScheme";
+const Stack = createNativeStackNavigator();
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function App() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "home" : "home-outline"}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="camera"
-        options={{
-          title: "Camera",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "camera" : "camera-outline"}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="ingredient"
-        options={{
-          title: "Ingredient",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "cart" : "cart-outline"}
-              color={color}
-            />
-          ),
-        }}
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ headerShown: false }} // ヘッダーを隠す
         />
-    </Tabs>
+        <Stack.Screen 
+          name="Camera" 
+          component={CameraComponet} 
+          options={{ headerShown: false }} // ヘッダーを隠す
+        />
+        <Stack.Screen 
+          name="PastMenu" 
+          component={PastMenu} 
+          options={{ headerShown: false }} // ヘッダーを隠す
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
