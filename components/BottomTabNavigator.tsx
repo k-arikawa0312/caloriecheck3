@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View, Text ,StyleSheet} from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
+import { windowHeight } from '@/constants/Responsive';
 
 // type BottomTabNavigatorProps = {
 //     navigation: NativeStackNavigationProp<{
@@ -21,9 +23,11 @@ const BottomTabNavigator = () => {
   return (
     <View style={styles.tabContainer}>
       <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Home')}>
+        <Ionicons name='home'/>
         <Text>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Camera')}>
+        <Ionicons name='camera'/>
         <Text>Camera</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('PastMenu')}>
