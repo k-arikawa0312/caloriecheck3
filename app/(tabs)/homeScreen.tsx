@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './indexStyle';
 import PastMenu from './pastMenu';
+import BottomTabNavigator from '@/components/BottomTabNavigator';
 
 // ナビゲーションの型を定義
 type HomeScreenProps = {
@@ -19,6 +20,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) { // 型を�
       <TouchableOpacity onPress={() => navigation.navigate('PastMenu')}> {/* 遷移を追加 */}
         <Text>メニュー</Text>
       </TouchableOpacity>
+      <BottomTabNavigator></BottomTabNavigator>
     </View>
   );
 }

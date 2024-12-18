@@ -11,7 +11,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 //       }>;
 // }
 
-const BottomTabNavigator=()=> {
+const BottomTabNavigator = () => {
   const navigation = useNavigation<NativeStackNavigationProp<{
       PastMenu: undefined; 
       Home: undefined;
@@ -31,7 +31,9 @@ const BottomTabNavigator=()=> {
       </TouchableOpacity>
     </View>
   );
-}
+};
+
+export default BottomTabNavigator;
 
 const styles = StyleSheet.create({
     tabContainer: {
