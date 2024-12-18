@@ -7,7 +7,7 @@ import PastMenu from './pastMenu';
 // ナビゲーションの型を定義
 type HomeScreenProps = {
   navigation: NativeStackNavigationProp<{
-    PastMenu: undefined; // 'Another'画面のパラメータの型
+    PastMenu: undefined; 
   }>;
 };
 
