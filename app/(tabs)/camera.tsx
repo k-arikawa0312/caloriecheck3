@@ -14,7 +14,18 @@ import { Camera, CameraView } from "expo-camera";
 import { useEffect, useState } from "react";
 import { CameraType } from "expo-camera/build/legacy/Camera.types";
 import React from "react";
-export default function CameraComponent() {
+import BottomTabNavigator from "@/components/BottomTabNavigator";
+import { navigation } from "@/utils/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { contentHeight, contentWidth } from "@/constants/Responsive";
+
+type HomeScreenProps = {
+  navigation: NativeStackNavigationProp<{
+    Home: undefined; 
+  }>;
+};
+
+export default function CameraComponent({navigation}:HomeScreenProps) {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
   const [type, setType] = useState(CameraType.back);
   const [camera, setCamera] = useState<CameraView | null>(null);
@@ -42,6 +53,9 @@ export default function CameraComponent() {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.topButtonContainer}>
+      <TouchableOpacity onPress={()=> navigation.navigate("Home")} style={{right:contentWidth*1.75}}>
+        <Ionicons name="home" size={24}/>
+      </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
             setType(
@@ -69,6 +83,7 @@ export default function CameraComponent() {
           onPress={takePicture}
         ></TouchableOpacity>
       </View>
+      
     </View>
   );
 }
