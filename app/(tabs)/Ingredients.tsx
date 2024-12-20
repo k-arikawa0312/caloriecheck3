@@ -53,8 +53,9 @@ export default function Ingredients({navigation}:HomeScreenProps) {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={()=> navigation.navigate("Home")} style={{right:contentWidth*1.75}}>
-        <Ionicons name="home" size={24} />
+      <TouchableOpacity onPress={()=> navigation.navigate("Home")} style={{right:contentWidth*1.75,backgroundColor:'red'}}>
+        <Ionicons name="home" size={24} color='black'/>
+        {/* <Text>aaa</Text> */}
       </TouchableOpacity>
       <Text style={styles.title}>ToDoアプリ</Text>
       <TextInput
