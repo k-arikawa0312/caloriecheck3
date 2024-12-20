@@ -15,6 +15,8 @@ import {
   import React from "react";
   import SuggestMenu from "@/components/SuggestMenu";
   import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import BottomTabNavigator from "@/components/BottomTabNavigator";
+import { contentWidth, windowHeight, windowWidth } from "@/constants/Responsive";
 
 // ナビゲーションの型を定義
 type PastMenuProps = {
@@ -86,10 +88,7 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
     };
     getDates();
     }, []);
-    const windowWidth = Dimensions.get("window").width;
-    const windowHeight = Dimensions.get("window").height;
-    const contentWidth = (windowWidth - 32) / 4;
-    const contentHeight = windowHeight / 20;
+    
 
     return isSp ? (
     <>
@@ -141,7 +140,7 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
             onClose={() => setIsAddUserModalOpen(false)}
         />
         )} */}
-
+        <BottomTabNavigator/>
     </>
     ) : (
     <View>

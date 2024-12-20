@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View, Text ,StyleSheet} from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
+import { contentHeight, windowHeight } from '@/constants/Responsive';
 
 // type BottomTabNavigatorProps = {
 //     navigation: NativeStackNavigationProp<{
@@ -13,7 +15,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const BottomTabNavigator = () => {
   const navigation = useNavigation<NativeStackNavigationProp<{
-      PastMenu: undefined; 
+      Ingredients: undefined; 
       Home: undefined;
       Camera: undefined;
   }>>();
@@ -21,31 +23,37 @@ const BottomTabNavigator = () => {
   return (
     <View style={styles.tabContainer}>
       <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Home')}>
+        <Ionicons name='home'/>
         <Text>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Camera')}>
+        <Ionicons name='camera'/>
         <Text>Camera</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('PastMenu')}>
-        <Text>Past Menu</Text>
+      <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Ingredients')}>
+        <Text>Ingredient</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
+
 export default BottomTabNavigator;
 
 const styles = StyleSheet.create({
     tabContainer: {
+      flex:1,
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'flex-end',
       padding: 10,
-      backgroundColor: '#fff', // 背景色を設定
+      backgroundColor: '#fff',
       borderTopWidth: 1,
-      borderTopColor: '#ccc', // 上部の境界線
+      borderTopColor: '#ccc',
+      height: 60, // 高さを指定
     },
     tabButton: {
       flex: 1,
       alignItems: 'center',
+      justifyContent: 'center', // ボタンの内容を垂直方向にもセンタリング
     },
   });
