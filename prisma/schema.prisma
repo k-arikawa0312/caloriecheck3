@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Menu {
@@ -18,6 +19,7 @@ model Menu {
   menuTitle String
   amount    Int
   ateAt     DateTime
+  timeZone  String
   calories  Int
   protein   Int
   fat       Int
