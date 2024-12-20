@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, View, Text ,StyleSheet} from 'react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
-import { windowHeight } from '@/constants/Responsive';
+import { contentHeight, windowHeight } from '@/constants/Responsive';
 
 // type BottomTabNavigatorProps = {
 //     navigation: NativeStackNavigationProp<{
@@ -15,7 +15,7 @@ import { windowHeight } from '@/constants/Responsive';
 
 const BottomTabNavigator = () => {
   const navigation = useNavigation<NativeStackNavigationProp<{
-      PastMenu: undefined; 
+      Ingredients: undefined; 
       Home: undefined;
       Camera: undefined;
   }>>();
@@ -30,28 +30,26 @@ const BottomTabNavigator = () => {
         <Ionicons name='camera'/>
         <Text>Camera</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('PastMenu')}>
-        <Text>Past Menu</Text>
+      <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Ingredients')}>
+        <Text>Ingredient</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
+
 export default BottomTabNavigator;
 
 const styles = StyleSheet.create({
     tabContainer: {
+      flex:1,
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'flex-end',
       padding: 10,
       backgroundColor: '#fff',
       borderTopWidth: 1,
       borderTopColor: '#ccc',
-      position: 'absolute',
-      top: 200, // タブを画面下部に配置
-      left: 0,
-      right: 0,
-      height: 60, // タブの高さを60pxに設定
+      height: 60, // 高さを指定
     },
     tabButton: {
       flex: 1,

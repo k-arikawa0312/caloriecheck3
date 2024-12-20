@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './homeScreen';
 import PastMenu from './pastMenu'; // 新しい画面をインポート
+import Ingredients from './Ingredients';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +13,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
         <Stack.Screen name="PastMenu" component={PastMenu} options={{headerShown:false}}/> 
+        <Stack.Screen name="Ingredent" component={Ingredients} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
