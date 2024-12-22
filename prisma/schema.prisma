@@ -27,3 +27,9 @@ model Menu {
   fiber     Float
   salt      Float
 }
+
+model Ingredient {
+  id         Int    @id @default(autoincrement())
+  ingredient String
+  amount     Float
+}
