@@ -11,17 +11,19 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model Menu {
   id        Int      @id @default(autoincrement())
   menuTitle String
-  amount    Int
+  amount    Float
   ateAt     DateTime
-  calories  Int
-  protein   Int
-  fat       Int
-  carbs     Int
-  fiber     Int
-  salt      Int
+  timeZone  String
+  calories  Float
+  protein   Float
+  fat       Float
+  carbs     Float
+  fiber     Float
+  salt      Float
 }

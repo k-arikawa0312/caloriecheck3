@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './homeScreen';
 import PastMenu from './pastMenu'; // 新しい画面をインポート
 import Ingredients from './Ingredients';
+import 'react-native-url-polyfill/auto';
 
 const Stack = createNativeStackNavigator();
 

@@ -1,4 +1,6 @@
+import { contentWidth } from "@/constants/Responsive";
 import { Ionicons } from "@expo/vector-icons";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -8,8 +10,16 @@ import {
   View,
   FlatList,
 } from "react-native";
+import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
 
-export default function Ingredients() {
+type HomeScreenProps = {
+  navigation: NativeStackNavigationProp<{
+    Home: undefined; 
+  }>;
+};
+
+
+export default function Ingredients({navigation}:HomeScreenProps) {
   const [task, setTask] = useState(""); // 新しいタスクまたは編集中のタスクのテキスト
   interface Ingredients {
     id: string;
@@ -43,6 +53,10 @@ export default function Ingredients() {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={()=> navigation.navigate("Home")} >
+        <Ionicons name="home" size={30} color='black'/>
+        {/* <Text>aaa</Text> */}
+      </TouchableOpacity>
       <Text style={styles.title}>ToDoアプリ</Text>
       <TextInput
         placeholder="タスクを入力"
