@@ -48,7 +48,14 @@ export default function CameraComponent({navigation}:HomeScreenProps) {
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return (
+      <View>
+      <Text>No access to camera</Text>;
+      <TouchableOpacity onPress={()=> navigation.navigate("Home")} >
+        <Ionicons name="home" size={24}/>
+      </TouchableOpacity>
+      </View>
+      )
   }
   return (
     <View style={{ flex: 1 }}>

@@ -31,6 +31,7 @@ const BottomTabNavigator = () => {
         <Text>Camera</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.tabButton} onPress={() => navigation.navigate('Ingredients')}>
+        <Ionicons name='cart'/>
         <Text>Ingredient</Text>
       </TouchableOpacity>
     </View>
