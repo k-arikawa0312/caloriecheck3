@@ -19,7 +19,8 @@ type HomeScreenProps = {
 };
 
 
-export default function Ingredients({navigation}:HomeScreenProps) {
+
+export default  function Ingredients({navigation}:HomeScreenProps) {
   const [task, setTask] = useState(""); // 新しいタスクまたは編集中のタスクのテキスト
   interface Ingredients {
     id: string;
@@ -28,28 +29,49 @@ export default function Ingredients({navigation}:HomeScreenProps) {
 
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
   const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
+  
+  useEffect(()=> {
+    const fetchIngredients = async  () => {
+      try{
+        const res = await fetch("http://localhost:8081/api/ingredients",{
+          method:"GET",
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept':'application/json'
+          },
+        })
+        console.log('tinko')
+        console.log(res)
+        const data = await res.json();
+        console.log(data.id)
+      }catch(e){
+        console.error(e)
+      }
+    }
+    fetchIngredients()
+  },[])
 
 
 
-  const renderTask = ({ item }: { item: Ingredients }) => (
-    <View style={styles.task}>
-      <Text style={styles.taskText}>{item.ingredient}</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.editButton}
-        //   onPress={() => handleEditTask(item)}
-        >
-        <Text>hennsyuu</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.deleteButton}
-        //   onPress={() => handleDeleteTask(item.id)}
-        >
-        <Text>sakujo</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+  // const renderTask = ({ item }: { item: Ingredients }) => (
+  //   <View style={styles.task}>
+  //     <Text style={styles.taskText}>{item.ingredient}</Text>
+  //     <View style={styles.buttonContainer}>
+  //       <TouchableOpacity
+  //         style={styles.editButton}
+  //       //   onPress={() => handleEditTask(item)}
+  //       >
+  //       <Text>hennsyuu</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity
+  //         style={styles.deleteButton}
+  //       //   onPress={() => handleDeleteTask(item.id)}
+  //       >
+  //       <Text>sakujo</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   </View>
+  // );
 
   return (
     <View style={styles.container}>
@@ -57,7 +79,7 @@ export default function Ingredients({navigation}:HomeScreenProps) {
         <Ionicons name="home" size={30} color='black'/>
         {/* <Text>aaa</Text> */}
       </TouchableOpacity>
-      <Text style={styles.title}>ToDoアプリ</Text>
+      {/* <Text style={styles.title}>ToDoアプリ</Text>
       <TextInput
         placeholder="タスクを入力"
         style={styles.input}
@@ -71,7 +93,7 @@ export default function Ingredients({navigation}:HomeScreenProps) {
         data={tasks}
         renderItem={renderTask}
         keyExtractor={(item) => item.id}
-      />
+      /> */}
     </View>
   );
 }
