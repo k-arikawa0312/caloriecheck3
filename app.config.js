@@ -10,6 +10,9 @@ export default {
     extra: {
       supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,
       supabaseKey: process.env.EXPO_PUBLIC_SUPABASE_KEY,
+      eas: {
+        projectId: "feb25cbf-6664-43d1-95b0-23b498d365bb"
+      }
     },
   },
 };

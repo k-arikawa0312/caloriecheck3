@@ -10,7 +10,7 @@ export function useIngredients() {
   async function fetchIngredients() {
     try {
       const { data, error } = await supabase
-        .from('ingredients')
+        .from('Ingredient')
         .select('*')
         
       if (error) throw error
@@ -23,22 +23,22 @@ export function useIngredients() {
     }
   }
 
-//   async function addIngredient(newIngredient) {
-//     try {
-//       const { data, error } = await supabase
-//         .from('ingredients')
-//         .insert([newIngredient])
-//         .select()
+  async function addIngredient(newIngredient: any) {
+    try {
+      const { data, error } = await supabase
+        .from('ingredient')
+        .insert([newIngredient])
+        .select()
 
-//       if (error) throw error
+      if (error) throw error
       
-//       setIngredients([...ingredients, ...data])
-//       return data
-//     } catch (error) {
-//       setError(error.message)
-//       return null
-//     }
-//   }
+      setIngredients([...ingredients, ...data])
+      return data
+    } catch (error:any) {
+      setError(error.message)
+      return null
+    }
+  }
 
   useEffect(() => {
     fetchIngredients()
@@ -48,7 +48,7 @@ export function useIngredients() {
     ingredients,
     loading,
     error,
-    // addIngredient,
+    addIngredient,
     refreshIngredients: fetchIngredients
   }
 }
