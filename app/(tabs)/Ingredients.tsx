@@ -10,7 +10,10 @@ import {
   View,
   FlatList,
 } from "react-native";
-import { blue } from "react-native-reanimated/lib/typescript/reanimated2/Colors";
+import axios from 'axios';
+import { useIngredients } from "@/hooks/useIngredients";
+import Constants from "expo-constants";
+
 
 type HomeScreenProps = {
   navigation: NativeStackNavigationProp<{
@@ -29,27 +32,10 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
 
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
   const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
-  
-  useEffect(()=> {
-    const fetchIngredients = async  () => {
-      try{
-        const res = await fetch("http://localhost:8081/api/ingredients",{
-          method:"GET",
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept':'application/json'
-          },
-        })
-        console.log('tinko')
-        console.log(res)
-        const data = await res.json();
-        console.log(data.id)
-      }catch(e){
-        console.error(e)
-      }
-    }
-    fetchIngredients()
-  },[])
+  const {ingredients,loading,error}=useIngredients()
+
+  console.log(ingredients)
+  console.error(error)
 
 
 
