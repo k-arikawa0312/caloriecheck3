@@ -32,7 +32,8 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
 
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
   const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
-  const {ingredients,loading,error}=useIngredients()
+  const {ingredients,loading,error,addIngredient}=useIngredients()
+
 
   console.log(ingredients)
   console.error(error)
