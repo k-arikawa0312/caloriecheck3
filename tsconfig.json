@@ -14,5 +14,5 @@
     "**/*.ts",
     "**/*.tsx",
     "hooks/useGoogleFirebaseAuth.js"
-  ]
+, "app.config.js"  ]
 }
