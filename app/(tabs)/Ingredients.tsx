@@ -14,6 +14,7 @@ import {
 import axios from 'axios';
 import { useIngredients } from "@/hooks/useIngredients";
 import Constants from "expo-constants";
+import { Picker } from "@react-native-picker/picker";
 
 
 type HomeScreenProps = {
@@ -35,12 +36,14 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
   const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
   const {ingredients,loading,error,addIngredient}=useIngredients()
-  const [newIngredient, setNewIngredient] = useState(""); 
-  const [amount, setAmount] = useState(1)
+  const [newIngredient, setNewIngredient] = useState(""); // 新しいingredientの状態を追加
+  const [amount, setAmount] = useState<string>("");
+  const [unit, setUnit] = useState<string>("個")
 
   const handleAddIngredient = () => {
     if (newIngredient.trim()) {
-      addIngredient(newIngredient,amount); 
+      console.log(amount+unit)
+      addIngredient(  newIngredient, amount,unit ); 
       setNewIngredient(""); 
     }
   };
@@ -63,12 +66,32 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
         <ActivityIndicator size="large" color="#00a86b"/>
       ):(
       <View>  
-      <TextInput
-        style={styles.input}
-        placeholder="新しい材料を入力"
-        value={newIngredient}
-        onChangeText={setNewIngredient} 
-      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={[styles.input, styles.inputLarge]}
+          placeholder="新しい材料を入力"
+          value={newIngredient}
+          onChangeText={setNewIngredient}
+        />
+        <TextInput
+          style={[styles.input, styles.inputMedium]}
+          placeholder="食材の量"
+          value={String(amount)}
+          keyboardType="numeric"
+          onChangeText={(text) => setAmount(text)}
+        />
+            <View style={{alignItems:"center"}}>
+              <Picker
+                selectedValue={unit}
+                onValueChange={(itemValue) => setUnit(itemValue)}
+                style={styles.picker}
+              >
+                <Picker.Item label="個" value="numberOf" />
+                <Picker.Item label="g" value="g" />
+              </Picker>
+            </View>
+          
+      </View>
       <TouchableOpacity onPress={handleAddIngredient} style={styles.saveButton}>
         <Text style={styles.saveButtonText}>追加</Text>
       </TouchableOpacity>
@@ -138,4 +161,23 @@ const styles = StyleSheet.create({
   deleteButtonText: {
     color: "#dc3545",
   },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  inputLarge: {
+    flex: 0.6,
+    marginRight: 5,
+  },
+  inputMedium: {
+    flex: 0.3,
+    marginRight: 5,
+  },
+  inputSmall: {
+    flex: 0.1,
+  },
+  picker:{
+    width:contentWidth*0.7
+  }
 });

@@ -11,7 +11,6 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  // directUrl = env("DIRECT_URL")
 }
 
 model Menu {
@@ -31,5 +30,5 @@ model Menu {
 model Ingredient {
   id         Int    @id @default(autoincrement())
   ingredient String
-  amount     Float
+  amount     String
 }

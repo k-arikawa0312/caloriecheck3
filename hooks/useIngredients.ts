@@ -23,11 +23,12 @@ export function useIngredients() {
     }
   }
 
-  async function addIngredient(newIngredient: string, amount:number) {
+  async function addIngredient(newIngredient: string, amount:string,unit:string) {
+    const amountWithUnit=amount+unit
     try {
       const { data, error } = await supabase
         .from('Ingredient')
-        .insert({'ingredient':newIngredient,'amount':amount})
+        .insert({'ingredient':newIngredient,'amount':amountWithUnit})
         .select()
 
       if (error) throw error
