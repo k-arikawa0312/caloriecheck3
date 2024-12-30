@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
   FlatList,
+  ActivityIndicator,
 } from "react-native";
 import axios from 'axios';
 import { useIngredients } from "@/hooks/useIngredients";
@@ -51,11 +52,15 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
       </TouchableOpacity>
       <Text style={styles.title}>Ingredients</Text>
       </View>
+      {loading ? (
+        <ActivityIndicator size="large" color="#00a86b"/>
+      ):
       <FlatList
         data={ingredients}
         renderItem={renderIngredient}
         keyExtractor={(item) => item.id}
       />
+      }
     </View>
   );
 }
