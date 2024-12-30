@@ -35,8 +35,15 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
   const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
   const {ingredients,loading,error,addIngredient}=useIngredients()
+  const [newIngredient, setNewIngredient] = useState(""); 
+  const [amount, setAmount] = useState(1)
 
-
+  const handleAddIngredient = () => {
+    if (newIngredient.trim()) {
+      addIngredient(newIngredient,amount); 
+      setNewIngredient(""); 
+    }
+  };
 
   const renderIngredient = ({ item }: { item: Ingredients }) => (
     <View style={styles.ingredients}>
@@ -54,12 +61,24 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
       </View>
       {loading ? (
         <ActivityIndicator size="large" color="#00a86b"/>
-      ):
+      ):(
+      <View>  
+      <TextInput
+        style={styles.input}
+        placeholder="新しい材料を入力"
+        value={newIngredient}
+        onChangeText={setNewIngredient} 
+      />
+      <TouchableOpacity onPress={handleAddIngredient} style={styles.saveButton}>
+        <Text style={styles.saveButtonText}>追加</Text>
+      </TouchableOpacity>
       <FlatList
         data={ingredients}
         renderItem={renderIngredient}
         keyExtractor={(item) => item.id}
       />
+      </View>
+      )
       }
     </View>
   );
