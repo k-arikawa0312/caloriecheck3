@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'flex-end',
       padding: 10,
-      backgroundColor: '#fff',
+      backgroundColor: '#ffffff',
       borderTopWidth: 1,
       borderTopColor: '#ccc',
       height: 60, // 高さを指定

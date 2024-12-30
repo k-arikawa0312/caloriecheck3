@@ -28,6 +28,7 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
   interface Ingredients {
     id: string;
     ingredient: string;
+    amount:number
   }
 
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
@@ -35,52 +36,26 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
   const {ingredients,loading,error,addIngredient}=useIngredients()
 
 
-  console.log(ingredients)
-  console.error(error)
 
-
-
-  // const renderTask = ({ item }: { item: Ingredients }) => (
-  //   <View style={styles.task}>
-  //     <Text style={styles.taskText}>{item.ingredient}</Text>
-  //     <View style={styles.buttonContainer}>
-  //       <TouchableOpacity
-  //         style={styles.editButton}
-  //       //   onPress={() => handleEditTask(item)}
-  //       >
-  //       <Text>hennsyuu</Text>
-  //       </TouchableOpacity>
-  //       <TouchableOpacity
-  //         style={styles.deleteButton}
-  //       //   onPress={() => handleDeleteTask(item.id)}
-  //       >
-  //       <Text>sakujo</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   </View>
-  // );
+  const renderIngredient = ({ item }: { item: Ingredients }) => (
+    <View style={styles.ingredients}>
+      <Text style={styles.taskText}>{item.ingredient}:{item.amount}</Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
+      <View style={{flexDirection:"row"}}>
       <TouchableOpacity onPress={()=> navigation.navigate("Home")} >
-        <Ionicons name="home" size={30} color='black'/>
-        {/* <Text>aaa</Text> */}
+        <Ionicons name="home" size={30} color='#00a86b'/>
       </TouchableOpacity>
-      {/* <Text style={styles.title}>ToDoアプリ</Text>
-      <TextInput
-        placeholder="タスクを入力"
-        style={styles.input}
-        value={task}
-        onChangeText={setTask}
-      />
-      <TouchableOpacity style={styles.saveButton} >
-        <Text style={styles.saveButtonText}>{isEditing ? "更新" : "追加"}</Text>
-      </TouchableOpacity>
+      <Text style={styles.title}>Ingredients</Text>
+      </View>
       <FlatList
-        data={tasks}
-        renderItem={renderTask}
+        data={ingredients}
+        renderItem={renderIngredient}
         keyExtractor={(item) => item.id}
-      /> */}
+      />
     </View>
   );
 }
@@ -94,6 +69,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    marginLeft:60,
+    color: "#00a86b",
   },
   input: {
     borderWidth: 1,
@@ -121,14 +98,15 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
   },
-  task: {
+  ingredients: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 20,
     padding: 10,
-    backgroundColor: "#eeeeee",
+    backgroundColor: "#dadada",
     borderRadius: 5,
+    borderColor:"#00a86b"
   },
   taskText: {
     maxWidth: "80%",
