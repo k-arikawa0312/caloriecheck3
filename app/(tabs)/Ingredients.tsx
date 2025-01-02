@@ -68,13 +68,14 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
       <View>  
       <View style={styles.inputContainer}>
         <TextInput
-          style={[styles.input, styles.inputLarge]}
+          style={styles.input}
           placeholder="新しい材料を入力"
           value={newIngredient}
           onChangeText={setNewIngredient}
         />
+        <View style={styles.amountContainer}>
         <TextInput
-          style={[styles.input, styles.inputMedium]}
+          style={styles.input}
           placeholder="食材の量"
           value={String(amount)}
           keyboardType="numeric"
@@ -90,7 +91,7 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
                 <Picker.Item label="g" value="g" />
               </Picker>
             </View>
-          
+        </View>  
       </View>
       <TouchableOpacity onPress={handleAddIngredient} style={styles.saveButton}>
         <Text style={styles.saveButtonText}>追加</Text>
@@ -162,22 +163,14 @@ const styles = StyleSheet.create({
     color: "#dc3545",
   },
   inputContainer: {
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     marginBottom: 10,
   },
-  inputLarge: {
-    flex: 0.6,
-    marginRight: 5,
-  },
-  inputMedium: {
-    flex: 0.3,
-    marginRight: 5,
-  },
-  inputSmall: {
-    flex: 0.1,
-  },
   picker:{
     width:contentWidth*0.7
+  },
+  amountContainer:{
+    flexDirection:"row"
   }
 });

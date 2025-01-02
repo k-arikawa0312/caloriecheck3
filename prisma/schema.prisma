@@ -28,7 +28,8 @@ model Menu {
 }
 
 model Ingredient {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   ingredient String
   amount     String
+  done       Boolean @default(false)
 }
