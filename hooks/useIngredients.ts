@@ -45,12 +45,12 @@ export function useIngredients() {
     try{
       const { data, error } = await supabase
         .from('Ingredient')
-        .update({ done: true })
+        .update({ done: !done })
         .eq('id', id)
         .select()
       if (error) throw error
       setIngredients(ingredients.map((t) =>
-        t.id === id ? { ...t, done: true } : t
+        t.id === id ? { ...t, done: !done } : t
       ))
     }catch(error:any){
       setError(error.message)
@@ -66,6 +66,7 @@ export function useIngredients() {
     loading,
     error,
     addIngredient,
-    refreshIngredients: fetchIngredients
+    checkIngredient,
+    refreshIngredients: fetchIngredients,
   }
 }
