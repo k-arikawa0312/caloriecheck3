@@ -41,6 +41,22 @@ export function useIngredients() {
     }
   }
 
+  const checkIngredient = async (id: string,done:boolean) => {
+    try{
+      const { data, error } = await supabase
+        .from('Ingredient')
+        .update({ done: !done })
+        .eq('id', id)
+        .select()
+      if (error) throw error
+      setIngredients(ingredients.map((t) =>
+        t.id === id ? { ...t, done: !done } : t
+      ))
+    }catch(error:any){
+      setError(error.message)
+    }
+  }
+
   useEffect(() => {
     fetchIngredients()
   }, [])
@@ -50,6 +66,7 @@ export function useIngredients() {
     loading,
     error,
     addIngredient,
-    refreshIngredients: fetchIngredients
+    checkIngredient,
+    refreshIngredients: fetchIngredients,
   }
 }
