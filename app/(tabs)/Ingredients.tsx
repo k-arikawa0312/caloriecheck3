@@ -56,9 +56,9 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
       <Text style={styles.taskText}>{item.ingredient}:{item.amount}</Text>
       <TouchableOpacity onPress={() => checkIngredient(item.id, item.done)}>
         {item.done?
-          <Ionicons name="key" size={20}/>
+          <Ionicons name="checkbox-outline" size={20}/>
           :
-          <Ionicons name="push"size={20}/>
+          <Ionicons name="square-outline" size={20}/>
           }
       </TouchableOpacity>
     </View>
