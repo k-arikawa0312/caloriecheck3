@@ -36,7 +36,7 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
 
   const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
   const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
-  const {ingredients,loading,error,addIngredient,checkIngredient}=useIngredients()
+  const {ingredients,loading,error,addIngredient,checkIngredient,deleteIngredient}=useIngredients()
   const [newIngredient, setNewIngredient] = useState(""); // 新しいingredientの状態を追加
   const [amount, setAmount] = useState<string>("");
   const [unit, setUnit] = useState<string>("個")
@@ -60,6 +60,9 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
           :
           <Ionicons name="square-outline" size={20}/>
           }
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>deleteIngredient(item.id)}>
+        <Ionicons name="trash"/>
       </TouchableOpacity>
     </View>
   );
