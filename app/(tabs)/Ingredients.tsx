@@ -26,7 +26,6 @@ type HomeScreenProps = {
 
 
 export default  function Ingredients({navigation}:HomeScreenProps) {
-  const [task, setTask] = useState(""); // 新しいタスクまたは編集中のタスクのテキスト
   interface Ingredients {
     id: string;
     ingredient: string;
@@ -34,8 +33,6 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
     done:boolean
   }
 
-  const [tasks, setTasks] = useState<Ingredients[]>([]); // タスクのリスト
-  const [isEditing, setIsEditing] = useState<string | null>(null); // 現在編集中のタスクのID
   const {ingredients,loading,error,addIngredient,checkIngredient,deleteIngredient}=useIngredients()
   const [newIngredient, setNewIngredient] = useState(""); // 新しいingredientの状態を追加
   const [amount, setAmount] = useState<string>("");
@@ -53,16 +50,18 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
 
   const renderIngredient = ({ item }: { item: Ingredients }) => (
     <View style={styles.ingredients}>
-      <Text style={styles.taskText}>{item.ingredient}:{item.amount}</Text>
-      <TouchableOpacity onPress={() => checkIngredient(item.id, item.done)}>
+      <View style={{flexDirection:"row"}}>
+      <TouchableOpacity onPress={() => checkIngredient(item.id, item.done)} style={{marginRight:10}}>
         {item.done?
           <Ionicons name="checkbox-outline" size={20}/>
           :
           <Ionicons name="square-outline" size={20}/>
           }
       </TouchableOpacity>
+      <Text style={styles.taskText}>{item.ingredient}:{item.amount}</Text>
+      </View>
       <TouchableOpacity onPress={()=>deleteIngredient(item.id)}>
-        <Ionicons name="trash"/>
+        <Ionicons name="trash-outline" size={20}/>
       </TouchableOpacity>
     </View>
   );
