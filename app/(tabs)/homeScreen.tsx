@@ -20,6 +20,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) { // 型を�
       <Text style={styles.spTitleContainer}>Calorie Checker</Text>
       <TouchableOpacity onPress={() => navigation.navigate('PastMenu')}> {/* 遷移を追加 */}
         <Text>メニュー</Text>
+        <Ionicons name="menu" size={50}/>
       </TouchableOpacity>
       {/* <TouchableOpacity>
         <Ionicons name='cart'style={{width:1,height:500}}/>

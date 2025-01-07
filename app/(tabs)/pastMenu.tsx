@@ -17,6 +17,7 @@ import {
   import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import BottomTabNavigator from "@/components/BottomTabNavigator";
 import { contentWidth, windowHeight, windowWidth } from "@/constants/Responsive";
+import { useMenu } from "@/hooks/useMenu";
 
 // ナビゲーションの型を定義
 type PastMenuProps = {
@@ -32,15 +33,16 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
     const [isMenuModalOpen, setIsMenuModalOpen] = useState<boolean>(false);
     const [isAddUserModalOpen,setIsAddUserModalOpen]=useState<boolean>(false)
     const isSp = useMediaQuery(mediaQuery.sp);
+    const {menus,loading,error,addMenu,fetchUniqueMenu} = useMenu()
     const timeZone = ["朝", "昼", "夕", "間食"];
     const meals: string[][] = [
-    ["a", "カツ丼", "ハムバーガー", "ラーメン"],
-    ["ハムバーガー", "チーズバーガー", "チキンバーガー","aaa"],
-    ["ハムバーガー", "チーズバーガー", "チキンバーガー","qqq"],
-    ["n", "o", "p","aqa"],
-    ["r", "s", "t","oosos"],
-    ["v", "w", "x","aksks"],
-    ["z", "aa", "bb","kdkd"],
+    ["", "", "", ""],
+    ["", "", "",""],
+    ["", "", "",""],
+    ["", "", "",""],
+    ["", "", "",""],
+    ["", "", "",""],
+    ["", "", "",""],
     ];
     const captions = {
     a: "カロリー",
@@ -69,7 +71,7 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
 
     useEffect(() => {
     const date = new Date();
-    const formattedDate = `${date.getFullYear()}年${
+    const formattedDate = `${
         date.getMonth() + 1
     }月${date.getDate()}日`;
     setCurrentDate(formattedDate);
@@ -80,6 +82,7 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
     const getDates = () => {
         for (let i = 0; i < 7; i++) {
         const date = new Date();
+        console.log(date.getDate())
         date.setDate(date.getDate() - i);
         const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
         dates.push(formattedDate);
@@ -87,7 +90,27 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
         setDates(dates);
     };
     getDates();
+    const fetchMenus=()=>{
+        const date = new Date();
+        for (let i = 0; i < 7; i++) {
+            date.setDate(date.getDate() - i);
+            fetchUniqueMenu(date, "朝").then(menu => {
+                meals[i][0] = menu;
+            });
+            fetchUniqueMenu(date, "昼").then(menu => {
+                meals[i][1] = menu;
+            });
+            fetchUniqueMenu(date, "夜").then(menu => {
+                meals[i][2] = menu;
+            });
+            fetchUniqueMenu(date, "間食").then(menu => {
+                meals[i][3] = menu;
+            });
+        }
+    }
+    fetchMenus()
     }, []);
+
     
 
     return isSp ? (

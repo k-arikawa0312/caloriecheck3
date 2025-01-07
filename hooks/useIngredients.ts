@@ -57,6 +57,20 @@ export function useIngredients() {
     }
   }
 
+  const deleteIngredient = async (id: string) => {
+    try {
+      const { data, error } = await supabase
+        .from('Ingredient')
+        .delete()
+        .eq('id', id)
+        .select()
+      if (error) throw error
+      setIngredients(ingredients.filter((t) => t.id !== id))
+    } catch (error: any) {
+      setError(error.message)
+    }
+  }
+
   useEffect(() => {
     fetchIngredients()
   }, [])
@@ -67,6 +81,7 @@ export function useIngredients() {
     error,
     addIngredient,
     checkIngredient,
+    deleteIngredient,
     refreshIngredients: fetchIngredients,
   }
 }
