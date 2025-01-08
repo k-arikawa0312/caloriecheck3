@@ -137,7 +137,7 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
             height: contentWidth * 0.5,
             borderRadius: (contentWidth * 0.5) / 2,
             right: windowWidth * 0.05,
-            bottom: `${windowHeight * 0.002}%`,
+            bottom: `${windowHeight * 0.01}%`,
             },
         ]}
         onPress={() => {
