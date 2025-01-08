@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#ffffff',
       borderTopWidth: 1,
       borderTopColor: '#ccc',
-      height: 60, // 高さを指定
+      height: '30%', // 高さを指定
     },
     tabButton: {
       flex: 1,

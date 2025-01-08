@@ -128,7 +128,6 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
             size={contentWidth * 3.5}
         />
         <MenuTable dates={dates} timeZones={timeZone} meals={meals} />
-        {/* <SuggestMenu></SuggestMenu> */}
         </ScrollView>
         <TouchableOpacity
         style={[
@@ -157,13 +156,9 @@ const PastMenu:React.FC<PastMenuProps>=()=>{
             onClose={() => setIsMenuModalOpen(false)}
         />
         )}
-        {/* {isAddUserModalOpen && (
-        <SignupForm
-            visible={isAddUserModalOpen}
-            onClose={() => setIsAddUserModalOpen(false)}
-        />
-        )} */}
-        <BottomTabNavigator/>
+        <View>
+        <BottomTabNavigator />
+        </View>
     </>
     ) : (
     <View>

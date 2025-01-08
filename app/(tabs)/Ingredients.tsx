@@ -11,9 +11,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import axios from 'axios';
 import { useIngredients } from "@/hooks/useIngredients";
-import Constants from "expo-constants";
 import { Picker } from "@react-native-picker/picker";
 
 
@@ -23,18 +21,18 @@ type HomeScreenProps = {
   }>;
 };
 
+type Ingredients = {
+  id: string;
+  ingredient: string;
+  amount:number
+  done:boolean
+}
 
 
 export default  function Ingredients({navigation}:HomeScreenProps) {
-  interface Ingredients {
-    id: string;
-    ingredient: string;
-    amount:number
-    done:boolean
-  }
 
   const {ingredients,loading,error,addIngredient,checkIngredient,deleteIngredient}=useIngredients()
-  const [newIngredient, setNewIngredient] = useState(""); // 新しいingredientの状態を追加
+  const [newIngredient, setNewIngredient] = useState(""); 
   const [amount, setAmount] = useState<string>("");
   const [unit, setUnit] = useState<string>("個")
 
