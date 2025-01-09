@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './homeScreen';
-import PastMenu from './pastMenu'; // 新しい画面をインポート
+import PastMenu from './pastMenu'; 
 import Ingredients from './Ingredients';
 import 'react-native-url-polyfill/auto';
 

@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { useIngredients } from "@/hooks/useIngredients";
 import { Picker } from "@react-native-picker/picker";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 type HomeScreenProps = {
@@ -38,7 +39,6 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
 
   const handleAddIngredient = () => {
     if (newIngredient.trim()) {
-      console.log(amount+unit)
       addIngredient(  newIngredient, amount,unit ); 
       setNewIngredient(""); 
     }
@@ -66,54 +66,57 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
 
   return (
     <View style={styles.container}>
-      <View style={{flexDirection:"row"}}>
-      <TouchableOpacity onPress={()=> navigation.navigate("Home")} >
-        <Ionicons name="home" size={30} color='#00a86b'/>
-      </TouchableOpacity>
-      <Text style={styles.title}>Ingredients</Text>
-      </View>
-      {loading ? (
-        <ActivityIndicator size="large" color="#00a86b"/>
-      ):(
-      <View>  
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="新しい材料を入力"
-          value={newIngredient}
-          onChangeText={setNewIngredient}
+      <ScrollView>
+        <View style={{flexDirection:"row"}}>
+        <TouchableOpacity onPress={()=> navigation.navigate("Home")} >
+          <Ionicons name="home" size={30} color='#00a86b'/>
+        </TouchableOpacity>
+        <Text style={styles.title}>Ingredients</Text>
+        </View>
+        {loading ? (
+          <ActivityIndicator size="large" color="#00a86b"/>
+        ):(
+        <View>  
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="新しい材料を入力"
+            value={newIngredient}
+            onChangeText={setNewIngredient}
+          />
+          <View style={styles.amountContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="食材の量"
+            value={String(amount)}
+            keyboardType="numeric"
+            onChangeText={(text) => setAmount(text)}
+          />
+              <View style={{alignItems:"center"}}>
+                <Picker
+                  selectedValue={unit}
+                  onValueChange={(itemValue) => setUnit(itemValue)}
+                  style={styles.picker}
+                >
+                  <Picker.Item label="個" value="numberOf" />
+                  <Picker.Item label="g" value="g" />
+                </Picker>
+              </View>
+          </View>  
+        </View>
+        <TouchableOpacity onPress={handleAddIngredient} style={styles.saveButton}>
+          <Text style={styles.saveButtonText}>追加</Text>
+        </TouchableOpacity>
+        <FlatList
+          data={ingredients}
+          renderItem={renderIngredient}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={true}
         />
-        <View style={styles.amountContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="食材の量"
-          value={String(amount)}
-          keyboardType="numeric"
-          onChangeText={(text) => setAmount(text)}
-        />
-            <View style={{alignItems:"center"}}>
-              <Picker
-                selectedValue={unit}
-                onValueChange={(itemValue) => setUnit(itemValue)}
-                style={styles.picker}
-              >
-                <Picker.Item label="個" value="numberOf" />
-                <Picker.Item label="g" value="g" />
-              </Picker>
-            </View>
-        </View>  
-      </View>
-      <TouchableOpacity onPress={handleAddIngredient} style={styles.saveButton}>
-        <Text style={styles.saveButtonText}>追加</Text>
-      </TouchableOpacity>
-      <FlatList
-        data={ingredients}
-        renderItem={renderIngredient}
-        keyExtractor={(item) => item.id}
-      />
-      </View>
-      )
+        </View>
+        )
       }
+    </ScrollView>
     </View>
   );
 }

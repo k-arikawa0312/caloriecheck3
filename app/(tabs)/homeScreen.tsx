@@ -6,19 +6,18 @@ import PastMenu from './pastMenu';
 import BottomTabNavigator from '@/components/BottomTabNavigator';
 import { Ionicons } from '@expo/vector-icons';
 
-// ナビゲーションの型を定義
 type HomeScreenProps = {
   navigation: NativeStackNavigationProp<{
     PastMenu: undefined; 
   }>;
 };
 
-export default function HomeScreen({ navigation }: HomeScreenProps) { // 型を指定
+export default function HomeScreen({ navigation }: HomeScreenProps) { 
 
   return (
     <View>
       <Text style={styles.spTitleContainer}>Calorie Checker</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('PastMenu')}> {/* 遷移を追加 */}
+      <TouchableOpacity onPress={() => navigation.navigate('PastMenu')}> 
         <Text>メニュー</Text>
         <Ionicons name="menu" size={50}/>
       </TouchableOpacity>
