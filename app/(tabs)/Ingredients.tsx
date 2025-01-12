@@ -100,6 +100,8 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
                 >
                   <Picker.Item label="個" value="numberOf" />
                   <Picker.Item label="g" value="g" />
+                  <Picker.Item label="kg" value="kg" />
+                  <Picker.Item label="本" value="本" />
                 </Picker>
               </View>
           </View>  
