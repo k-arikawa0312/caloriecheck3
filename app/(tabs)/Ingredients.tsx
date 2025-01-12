@@ -102,6 +102,11 @@ export default  function Ingredients({navigation}:HomeScreenProps) {
                   <Picker.Item label="g" value="g" />
                   <Picker.Item label="kg" value="kg" />
                   <Picker.Item label="本" value="本" />
+                  <Picker.Item label="ml" value="ml" />
+                  <Picker.Item label="L" value="L" />
+                  <Picker.Item label="カップ" value="カップ" />
+                  <Picker.Item label="大さじ" value="大さじ" />
+                  <Picker.Item label="小さじ" value="小さじ" />
                 </Picker>
               </View>
           </View>  
